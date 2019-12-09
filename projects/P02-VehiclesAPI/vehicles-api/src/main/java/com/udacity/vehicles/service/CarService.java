@@ -49,6 +49,7 @@ public class CarService {
         Car car = optionalCar.get();
 
         String price = priceClient.getPrice(car.getId());
+        car.setPrice(price);
 
 
         /**

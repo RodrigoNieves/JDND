@@ -55,6 +55,7 @@ public class CarService {
          * Note: The car class file uses @transient, meaning you will need to call
          *   the pricing service each time to get the price.
          */
+        String price = priceClient.getPrice(car.getId());
 
 
         /**

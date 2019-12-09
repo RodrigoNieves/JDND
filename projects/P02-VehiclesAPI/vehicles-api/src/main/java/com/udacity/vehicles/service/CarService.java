@@ -80,17 +80,15 @@ public class CarService {
      * Deletes a given car by ID
      * @param id the ID number of the car to delete
      */
-    public void delete(Long id) {
-        /**
-         * TODO: Find the car by ID from the `repository` if it exists.
-         *   If it does not exist, throw a CarNotFoundException
-         */
+    public void delete(Long id) throws CarNotFoundException {
 
+        Optional<Car> optionalCar = repository.findById(id);
+        if (!optionalCar.isPresent()) {
+            throw new CarNotFoundException("Card with id " + id + " Not Found");
+        }
 
-        /**
-         * TODO: Delete the car from the repository.
-         */
+        Car car = optionalCar.get();
 
-
+        repository.delete(car);
     }
 }

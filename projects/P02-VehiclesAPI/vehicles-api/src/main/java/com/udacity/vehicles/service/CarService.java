@@ -48,13 +48,6 @@ public class CarService {
 
         Car car = optionalCar.get();
 
-        /**
-         * TODO: Use the Pricing Web client you create in `VehiclesApiApplication`
-         *   to get the price based on the `id` input'
-         * TODO: Set the price of the car
-         * Note: The car class file uses @transient, meaning you will need to call
-         *   the pricing service each time to get the price.
-         */
         String price = priceClient.getPrice(car.getId());
 
 

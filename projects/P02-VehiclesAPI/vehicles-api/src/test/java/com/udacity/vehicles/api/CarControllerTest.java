@@ -20,7 +20,11 @@ import com.udacity.vehicles.domain.car.Details;
 import com.udacity.vehicles.domain.manufacturer.Manufacturer;
 import com.udacity.vehicles.service.CarService;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +52,9 @@ public class CarControllerTest {
 
     @Autowired
     private JacksonTester<Car> json;
+
+    @Autowired
+    private JacksonTester<List> listJsonTester;
 
     @MockBean
     private CarService carService;
@@ -91,19 +98,11 @@ public class CarControllerTest {
      */
     @Test
     public void listCars() throws Exception {
-        Car car =  getCar();
+        Car car = getCar();
         mvc.perform(
-                post(new URI("/cars"))
-                    .content(json.write(car).getJson())
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isCreated());
-        mvc.perform(
-                get(new URI("/cars"))
-                .content(json.write(car).getJson())
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .accept(MediaType.APPLICATION_JSON_UTF8))
-        .andExpect(status().isOk());
+                get(new URI("/cars")))
+        .andExpect(status().isOk())
+        .andExpect(content().json(listJsonTester.write(Arrays.asList(car)).getJson()));
     }
 
     /**
@@ -116,7 +115,16 @@ public class CarControllerTest {
          * TODO: Add a test to check that the `get` method works by calling
          *   a vehicle by ID. This should utilize the car from `getCar()` below.
          */
-
+        Car car = getCar();
+        mvc.perform(
+                post(new URI("/cars"))
+                        .content(json.write(car).getJson())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated());
+        mvc.perform(
+                get(new URI("/cars"))
+        );
     }
 
     /**

@@ -10,7 +10,9 @@ public class Application {
     public static void main(String[] args) {
         // STEP 1: Create the JDBC URL for JDND-C3 database
         try {
-            try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/JDND-C3?user=root?password=rootpass"))
+            try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/JDND-C3?user=root&password=rootpass")) {
+                System.out.println("Connected to " + conn.getMetaData().getDatabaseProductName());
+            }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

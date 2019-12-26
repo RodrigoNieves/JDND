@@ -3,10 +3,8 @@ package com.udacity.course3.lesson1.exercise1.exercise1;
 
 import org.flywaydb.core.Flyway;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
 
 public class Application {
 
@@ -19,15 +17,24 @@ public class Application {
                 try (Statement stmt = conn.createStatement()) {
                     stmt.executeUpdate("INSERT INTO `member` (first_name,last_name,age,gender) VALUES('Rodrigo','Santiago',29,'male'),('Ruben','Nieves',30,'male'); ");
                 }
+                try(Statement stmt = conn.createStatement()) {
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM `member`");
+                    while (rs.next()) {
+                        System.out.print("id: " + rs.getInt("id") + ", ");
+                        System.out.print("first_name: " + rs.getString("first_name") + ", ");
+                        System.out.print("last_name: " + rs.getString("last_name") + ", ");
+                        System.out.print("age: " + rs.getInt("age") + ", ");
+                        System.out.print("gender: " + rs.getString("gender") + ", ");
+                        System.out.println("balance: " + rs.getDouble("balance"));
+                    }
+                }
+
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError" + ex.getErrorCode());
         }
-        // STEP 4: Use Statement to INSERT 2 records into the member table
-        // NOTE: The member table is created using Flyway by placing the migration file in src/main/resources/db/migration
-
 
         // STEP 5: Read ALL the rows from the member table and print them here
 

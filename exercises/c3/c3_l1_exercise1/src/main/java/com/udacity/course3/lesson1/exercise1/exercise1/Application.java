@@ -1,6 +1,8 @@
 package com.udacity.course3.lesson1.exercise1.exercise1;
 
 
+import org.flywaydb.core.Flyway;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,8 +12,11 @@ public class Application {
     public static void main(String[] args) {
         // STEP 1: Create the JDBC URL for JDND-C3 database
         try {
+            Flyway flyway = Flyway.configure().dataSource("jdbc:mysql://localhost/JDND-C3", "root", "rootpass").load();
+            flyway.migrate();
             try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/JDND-C3?user=root&password=rootpass")) {
                 System.out.println("Connected to " + conn.getMetaData().getDatabaseProductName());
+                
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

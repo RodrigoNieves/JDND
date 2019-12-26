@@ -56,15 +56,23 @@ public class OrderTest {
         em.getTransaction().commit();
         em.close();
 
+        readOrder(order.getOrderId(), factory);
+
         factory.close();
     }
 
     private static void readOrder(Integer orderId, EntityManagerFactory factory) {
         // STEP 1: Create an EntityManager
+        EntityManager em = factory.createEntityManager();
 
         // STEP 2: use the find() method to load an order
         // OrderItem is fetched eagerly by using a JOIN
+        Order order = em.find(Order.class, orderId);
 
+        System.err.println("Order: " + order);
+        for(OrderItem oi : order.getOrderItems()) {
+            System.err.println("Item: " + oi);
+        }
     }
 
    private static void deleteOrder(Integer orderId, EntityManagerFactory factory) {

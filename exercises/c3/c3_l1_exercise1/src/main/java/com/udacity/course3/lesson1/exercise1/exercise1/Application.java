@@ -16,7 +16,7 @@ public class Application {
             flyway.migrate();
             try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/JDND-C3?user=root&password=rootpass")) {
                 System.out.println("Connected to " + conn.getMetaData().getDatabaseProductName());
-                
+
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

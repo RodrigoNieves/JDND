@@ -1,9 +1,9 @@
-CREATE TABLE member (
+CREATE TABLE `member` (
     id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(1000),
     last_name VARCHAR(1000),
-    age TINIYINT UNSIGNED,
+    age INTEGER UNSIGNED,
     genger TINYTEXT,
-    balance FLOAT(7, 2) DEFAULT 0,
-    CONSTRAINT member_pk PRIMARY_KEY(id)
+    balance FLOAT(7, 2) DEFAULT 0.00,
+    CONSTRAINT member_pk PRIMARY KEY(id)
 );

@@ -28,18 +28,12 @@ public class Application {
                         System.out.println("balance: " + rs.getDouble("balance"));
                     }
                 }
-
             }
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError" + ex.getErrorCode());
         }
-
-        // STEP 5: Read ALL the rows from the member table and print them here
-
-
-        // STEP 6: verify that all inserted rows have been printed
     }
 
 }

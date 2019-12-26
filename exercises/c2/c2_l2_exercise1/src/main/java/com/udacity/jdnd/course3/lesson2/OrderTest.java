@@ -18,23 +18,45 @@ public class OrderTest {
 
     public static void main(String[] args) {
         // STEP 1: Create a factory for the persistence unit
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
         // STEP 2: Create an EntityManager
+        EntityManager em = factory.createEntityManager();
 
         // STEP 3: Start a transaction
+        em.getTransaction().begin();
 
         // STEP 4: Create an order (entity is in Transient state)
+        Order order = new Order();
+        order.setCustomerName("Rodrigo");
+        order.setCustomerAddress("Calle 1");
+        order.setCreatedTime(Timestamp.valueOf(LocalDateTime.now()));
+
 
         // create order item1
+        OrderItem item1 = new OrderItem();
+        item1.setItemName("Item 1");
+        item1.setItemCount(1);
+        item1.setOrder(order);
 
         // create order item2
+        OrderItem item2 = new OrderItem();
+        item2.setItemName("Item 2");
+        item2.setItemCount(1);
+        item2.setOrder(order);
+
+        order.setOrderItems(Arrays.asList(item1, item2));
 
         // STEP 5: Persist the order entity
+        em.persist(order);
 
         // NOTE: Order Item is NOT persisted here
 
         // entity is persistent now
+        em.getTransaction().commit();
+        em.close();
 
+        factory.close();
     }
 
     private static void readOrder(Integer orderId, EntityManagerFactory factory) {

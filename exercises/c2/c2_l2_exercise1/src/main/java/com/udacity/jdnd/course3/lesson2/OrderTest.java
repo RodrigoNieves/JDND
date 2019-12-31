@@ -6,9 +6,12 @@ import com.udacity.jdnd.course3.lesson2.entity.OrderItem;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 public class OrderTest {
 
@@ -72,6 +75,15 @@ public class OrderTest {
         System.err.println("Order: " + order);
         for(OrderItem oi : order.getOrderItems()) {
             System.err.println("Item: " + oi);
+        }
+
+        // Using JPQL
+        Query query = em.createQuery("SELECT o from Order o");
+        List<Order> orders = query.getResultList();
+        for(int i =  0 ; i < orders.size(); i++) {
+            System.err.println("Order " + orders.get(i).getOrderId());
+            System.err.println(orders.get(i));
+
         }
     }
 

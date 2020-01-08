@@ -34,6 +34,18 @@ public class Application {
 
         MongoCollection<Document> members = database.getCollection("members");
 
+        //insert(members);
+
+        query();
+        // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.
+        mongoClient.close();
+    }
+
+    public static void query() {
+
+    }
+
+    public static void insert( MongoCollection<Document> members){
         Document member = new Document()
                 .append("firts_name","Carl")
                 .append("last_name", "Jenkins")
@@ -133,7 +145,5 @@ public class Application {
         members.deleteOne(new Document().append("_id","MyId"));
 
         members.deleteOne(new Document().append("sex","male"));
-        // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.
     }
-
 }

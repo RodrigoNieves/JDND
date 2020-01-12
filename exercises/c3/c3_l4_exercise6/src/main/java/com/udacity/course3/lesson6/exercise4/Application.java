@@ -1,6 +1,6 @@
 package com.udacity.course3.lesson6.exercise4;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
@@ -13,10 +13,10 @@ public class Application {
         // Username: course3
         // Password: course3
         // DB: jdnd-c3
-        String uri = "mongodb://course3:course3@localhost:27017//jdnd-c3";
+        String uri = "mongodb://course3:course3@localhost:27017/jdnd-c3";
 
         // STEP 2: Create a MongoClient
-        MongoClient mongoClient = (MongoClient) MongoClients.create(uri);
+        MongoClient mongoClient = MongoClients.create(uri);
 
 
         // STEP 3: Select the jdnd-c3 database to work with

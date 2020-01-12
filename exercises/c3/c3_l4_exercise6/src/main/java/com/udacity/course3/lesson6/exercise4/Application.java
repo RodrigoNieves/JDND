@@ -2,7 +2,9 @@ package com.udacity.course3.lesson6.exercise4;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 public class Application {
 
@@ -23,6 +25,10 @@ public class Application {
         MongoDatabase database = mongoClient.getDatabase("jdnd-c3");
 
         // Perform all the steps listed in the exercise
+        MongoCollection<Document> members = database.getCollection("members");
+        members.find(new Document("last_name","Khan"))
+                .iterator()
+                .forEachRemaining(doc -> System.out.println("Kahn: " + doc));
 
 
         // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.

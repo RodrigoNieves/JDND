@@ -49,6 +49,9 @@ public class Application {
         members.find(new Document("address.state","MN"))
                 .iterator()
                 .forEachRemaining(doc -> System.out.println("Live in MN: " + doc));
+
+        long count = members.countDocuments(new Document("gender", "male"));
+        System.out.println("Males: " + count);
         // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.
         mongoClient.close();
     }

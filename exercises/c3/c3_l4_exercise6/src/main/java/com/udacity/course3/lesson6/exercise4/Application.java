@@ -52,6 +52,12 @@ public class Application {
 
         long count = members.countDocuments(new Document("gender", "male"));
         System.out.println("Males: " + count);
+
+        members.find(new Document("gender", "female"))
+                .sort(new Document("last_name", 1))
+                .limit(1)
+                .iterator()
+                .forEachRemaining(doc -> System.out.println("Female: "+ doc));
         // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.
         mongoClient.close();
     }

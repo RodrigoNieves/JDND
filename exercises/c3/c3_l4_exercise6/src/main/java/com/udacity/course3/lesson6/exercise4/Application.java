@@ -42,6 +42,9 @@ public class Application {
                 .forEachRemaining(doc -> System.out.println("Doe female: " +doc));
 
 
+        members.find(new Document("interests", "golf"))
+                .iterator()
+                .forEachRemaining(doc -> System.out.println("Likes golf: " + doc));
         // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.
         mongoClient.close();
     }

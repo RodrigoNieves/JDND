@@ -6,6 +6,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.util.Arrays;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -26,9 +28,18 @@ public class Application {
 
         // Perform all the steps listed in the exercise
         MongoCollection<Document> members = database.getCollection("members");
+
         members.find(new Document("last_name","Khan"))
                 .iterator()
                 .forEachRemaining(doc -> System.out.println("Kahn: " + doc));
+
+
+        members.find(new Document("$and",
+                Arrays.asList(
+                        new Document("last_name", "Doe"),
+                        new Document("gender", "female"))))
+                .iterator()
+                .forEachRemaining(doc -> System.out.println("Doe female: " +doc));
 
 
         // IMPORTANT: Make sure to close the MongoClient at the end so your program exits.

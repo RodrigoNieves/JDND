@@ -2,9 +2,11 @@ package com.udacity.course3.exercise10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+@DataMongoTest
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTests {

@@ -8,12 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@DataMongoTest
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTests {
-
-    @Autowired MongoTemplate mongoTemplate;
 
     @Test
     public void test() {

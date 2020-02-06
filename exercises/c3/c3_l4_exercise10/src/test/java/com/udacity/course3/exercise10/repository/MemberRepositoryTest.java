@@ -2,6 +2,7 @@ package com.udacity.course3.exercise10.repository;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
+import com.udacity.course3.exercise10.model.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataMongoTest
 public class MemberRepositoryTest {
     @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
     private MongoTemplate mongoTemplate;
 
     @Test
@@ -28,5 +32,12 @@ public class MemberRepositoryTest {
         mongoTemplate.save(member, "members");
 
         assertThat(mongoTemplate.findAll(DBObject.class,"members").size()).isEqualTo(1);
+    }
+
+    @Test
+    public void repository() {
+        Member member = new Member();
+        memberRepository.save(member);
+        assertThat(memberRepository.findAll().size()).isEqualTo(1);
     }
 }

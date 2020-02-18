@@ -36,4 +36,11 @@ public class HelperTest {
         int[] expected = {10,14,2};
         assertArrayEquals(expected,yrs);
     }
+
+    @Test
+    public void verify_getMergedList() {
+        List<String> empNames = Arrays.asList("sareeta", "", "john","");
+        String actual = Helper.getMergedList(empNames);
+        assertEquals("sareeta, john",actual);
+    }
 }

@@ -10,6 +10,10 @@ import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.xml.ws.Response;
+
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
@@ -48,5 +52,45 @@ public class UserControllerTest {
         assertEquals(0, u.getId());
         assertEquals("test", u.getUsername());
         assertEquals("thisIsHashed", u.getPassword());
+    }
+
+    @Test
+    public void find_by_user_name_happy_path() throws Exception {
+        User testUser = new User();
+        testUser.setUsername("testUsername");
+        testUser.setId(10);
+        testUser.setPassword("testPassword");
+        when(userRepo.findByUsername(testUser.getUsername())).thenReturn(testUser);
+
+
+        final ResponseEntity<User> response = userController.findByUserName(testUser.getUsername());
+
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
+
+        User u = response.getBody();
+        assertNotNull(u);
+        assertEquals(10,u.getId());
+        assertEquals("testUsername", u.getUsername());
+    }
+
+    @Test
+    public void find_by_id_happy_path() throws Exception {
+        User testUser = new User();
+        testUser.setUsername("testUsername");
+        testUser.setId(10);
+        testUser.setPassword("testPassword");
+        when(userRepo.findById(testUser.getId())).thenReturn(Optional.of(testUser));
+
+
+        final ResponseEntity<User> response = userController.findById(testUser.getId());
+
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
+
+        User u = response.getBody();
+        assertNotNull(u);
+        assertEquals(10,u.getId());
+        assertEquals("testUsername", u.getUsername());
     }
 }

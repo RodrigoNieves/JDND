@@ -10,14 +10,12 @@ import com.example.demo.model.persistence.repositories.UserRepository;
 import com.example.demo.model.requests.ModifyCartRequest;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
